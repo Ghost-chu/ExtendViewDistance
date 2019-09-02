@@ -1,0 +1,4 @@
+name: ExtendViewDistance
+version: ${project.version}
+main: ExtendViewDistance.Index
+authors: [XUAN_Cat]
