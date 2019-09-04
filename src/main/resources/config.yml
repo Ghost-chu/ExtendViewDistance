@@ -1,30 +1,63 @@
+# -- 繁體中文 --
 # 最高可擴展的視野距離
 # 建議值,伺服器設置4-6,插件設置4-64
 # 不影響伺服器本身的視野距離
 # 實際上是依照客戶端的視野距離來調整,但如果客戶端條超過此限值,一樣只有此限制的視野距離
 # 從此插件延伸的區塊不會載入實體/方塊更新
+# -- English --
+# Maximum expandable field of view distance
+# Recommended value, server setting 4-6, plugin setting 4-64
+# Does not affect the visual field distance of the server itself
+# Actually, it is adjusted according to the distance of the client's field of view, but if the client bar exceeds this limit, the field of view with only this limit is the same.
+# Blocks extended from this plugin will not load entity/block updates
 ExtendViewDistance: 32
 
+# -- 繁體中文 --
 # 每個tick可以讀取多少區塊
 # 值越低,就需要越多時間玩家才能完成加載所有擴展區塊
 # 只讀取已經生成過的區塊,插件不會生成(太耗費性能)
 # 切勿過高,伺服器可能會有滯後問題
 # 按照 伺服器性能、網路上傳速度、存取I/O性能 做依據,來調整此值
+# -- English --
+# How many blocks can be read per tick
+# The lower the value, the more time it takes for the player to finish loading all the extents.
+# Only read the blocks that have been generated, the plugin will not generate (too much performance)
+# Don't be too high, the server may have a lag problem
+# Adjust this value based on server performance, network upload speed, and access I/O performance.
 TickSendChunkAmount: 5
+# -- 繁體中文 --
 # 每個tick能發送給每個玩家多少個封包
 # 如果總數已經超過TickSendChunkAmount,則也不會繼續發送
 # 切勿比TickSendChunkAmount還高,建議值為TickSendChunkAmount÷5
 # 過高的話可能嚴重造成客戶端卡頓,且伺服器可能會短暫排擠某些玩家
+# -- English --
+# How many packets can each tick send to each player
+# If the total has exceeded TickSendChunkAmount, it will not continue to send
+# Don't be taller than TickSendChunkAmount, the recommended value is TickSendChunkAmount÷5
+# Too high may cause the client to be stuck, and the server may temporarily crowd out some players.
 PlayerTickSendChunkAmount: 1
 
+# -- 繁體中文 --
 # 玩家離區塊太遠,是否發送區塊卸除請求給玩家(主要適用於客戶端性能)
 # 僅從1.14開始支持
+# -- English --
+# The player is too far away from the block, whether to send the block removal request to the player (mainly for client performance)
+#Starting from 1.14 only
 PlayerOutChunkSendUnload: true
 
+# -- 繁體中文 --
 # 多少次tick進行1次區塊權重重新檢查
 # 沒有特別要求的話,建議不要調整此值
+# -- English --
+# How many times tick performs 1 block weight recheck
+# It is not recommended to adjust this value without special requirements.
 TickChunkExamine: 40
+# -- 繁體中文 --
 # 多少次tick進行1次區塊發送
 # 沒有特別要求的話,建議不要調整此值
 # 過低會造成滯後問題
+# -- English --
+# How many times tick is sent 1 block
+# It is not recommended to adjust this value without special requirements.
+# too low will cause lag problems
 TickChunkSend: 5
