@@ -9,7 +9,7 @@
 # Recommended value, server setting 4-6, plugin setting 4-64
 # Does not affect the visual field distance of the server itself
 # Actually, it is adjusted according to the distance of the client's field of view, but if the client bar exceeds this limit, the field of view with only this limit is the same.
-# Blocks extended from this plugin will not load entity/block updates
+# chunks extended from this plugin will not load entity/chunk updates
 ExtendViewDistance: 32
 
 # -- 繁體中文 --
@@ -19,9 +19,9 @@ ExtendViewDistance: 32
 # 切勿過高,伺服器可能會有滯後問題
 # 按照 伺服器性能、網路上傳速度、存取I/O性能 做依據,來調整此值
 # -- English --
-# How many blocks can be read per tick
+# How many chunks can be read per tick
 # The lower the value, the more time it takes for the player to finish loading all the extents.
-# Only read the blocks that have been generated, the plugin will not generate (too much performance)
+# Only read the chunks that have been generated, the plugin will not generate (too much performance)
 # Don't be too high, the server may have a lag problem
 # Adjust this value based on server performance, network upload speed, and access I/O performance.
 TickSendChunkAmount: 5
@@ -41,7 +41,7 @@ PlayerTickSendChunkAmount: 1
 # 玩家離區塊太遠,是否發送區塊卸除請求給玩家(主要適用於客戶端性能)
 # 僅從1.14開始支持
 # -- English --
-# The player is too far away from the block, whether to send the block removal request to the player (mainly for client performance)
+# The player is too far away from the chunk, whether to send the chunk removal request to the player (mainly for client performance)
 #Starting from 1.14 only
 PlayerOutChunkSendUnload: true
 
@@ -49,7 +49,7 @@ PlayerOutChunkSendUnload: true
 # 多少次tick進行1次區塊權重重新檢查
 # 沒有特別要求的話,建議不要調整此值
 # -- English --
-# How many times tick performs 1 block weight recheck
+# How many times tick performs 1 chunk weight recheck
 # It is not recommended to adjust this value without special requirements.
 TickChunkExamine: 40
 # -- 繁體中文 --
@@ -57,7 +57,7 @@ TickChunkExamine: 40
 # 沒有特別要求的話,建議不要調整此值
 # 過低會造成滯後問題
 # -- English --
-# How many times tick is sent 1 block
+# How many times tick is sent 1 chunk
 # It is not recommended to adjust this value without special requirements.
 # too low will cause lag problems
 TickChunkSend: 5
