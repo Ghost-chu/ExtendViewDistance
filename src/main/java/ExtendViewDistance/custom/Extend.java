@@ -26,11 +26,11 @@ public interface Extend {
 
         String bukkitVersion = Bukkit.getBukkitVersion();
 
-        if (bukkitVersion.matches("1\\.14\\.[0-9]*-R[0-9]*\\.1-SNAPSHOT")) {
+        if (bukkitVersion.matches("1\\.14\\.[0-9]*-R[0-9]*\\..*")) {
             // 1.14
             return new v1_14_R1();
         } else
-        if (bukkitVersion.matches("1\\.13\\.[0-9]*-R[0-9]*\\.1-SNAPSHOT")) {
+        if (bukkitVersion.matches("1\\.13\\.[0-9]*-R[0-9]*\\..*")) {
             // 1.13
             return new v1_13_R2();
         }

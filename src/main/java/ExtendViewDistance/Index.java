@@ -14,7 +14,7 @@ public final class Index extends JavaPlugin {
         // 取得當前版本能使用的擴展
         Value.extend = Extend.getExtend();
         if (Value.extend == null) {
-            getLogger().warning(ChatColor.RED + "錯誤! 不支持的MC版本:" + Bukkit.getBukkitVersion());
+            getLogger().warning(ChatColor.RED + "Error! Unsupported MC version:" + Bukkit.getBukkitVersion()); // 錯誤,不支持的MC版本
             Bukkit.getPluginManager().disablePlugin(this, false); // 停用插件
             return;
         }
@@ -43,12 +43,12 @@ TickIsLag: 50
         Bukkit.getScheduler().runTaskTimerAsynchronously(Value.plugin, Loop::runAsync, 0, 1); // 顯示更遠的區塊給玩家
 
 
-        getLogger().info(ChatColor.GREEN + "插件載入完成!");
+        getLogger().info(ChatColor.GREEN + "Plugin loading completed!"); // 插件加载完成!
     }
 
     @Override
     public void onDisable() {
 
-        getLogger().info(ChatColor.RED + "插件停止!");
+        getLogger().info(ChatColor.RED + "Plugin stop!"); // 插件停止!
     }
 }
