@@ -42,7 +42,7 @@ PlayerTickSendChunkAmount: 1
 # 僅從1.14開始支持
 # -- English --
 # The player is too far away from the chunk, whether to send the chunk removal request to the player (mainly for client performance)
-#Starting from 1.14 only
+# Starting from 1.14 only
 PlayerOutChunkSendUnload: true
 
 # -- 繁體中文 --
