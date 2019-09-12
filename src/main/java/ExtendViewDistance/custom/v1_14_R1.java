@@ -34,51 +34,64 @@ public class v1_14_R1 implements Extend {
 
     /** 發送封包 */
     private void playerSendPacket(Player player, Packet packet) {
+
+        //synchronized (getNMSPlayer(player)) {
         synchronized (getNMSPlayer(player).playerConnection.networkManager) {
+
             NetworkManager              networkManager  = getNMSPlayer(player).playerConnection.networkManager;   // 玩家連線
             Channel                     channel         = networkManager.channel;                                 // 取得連線通道
             AttributeKey<EnumProtocol>  enumProtocols   = AttributeKey.valueOf("protocol");                       // 取得所有協議協定類型
             EnumProtocol                enumprotocol    = EnumProtocol.a(packet);
             EnumProtocol                enumprotocol1   = channel.attr(enumProtocols).get();
 
-            if (channel.isOpen()) {
 
-                if (channel.eventLoop().inEventLoop()) {
-                    if (enumprotocol != enumprotocol1) {
-                        networkManager.setProtocol(enumprotocol);
-                    }
+            synchronized (channel) {
+                synchronized (networkManager) {
 
-                    ChannelFuture channelfuture = channel.write(packet);
-                    channelfuture.addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
-                } else {
-                    channel.eventLoop().execute(() -> {
-                        if (enumprotocol != enumprotocol1) {
-                            networkManager.setProtocol(enumprotocol);
+                    if (channel.isOpen()) {
+
+                        if (channel.eventLoop().inEventLoop()) {
+                            if (enumprotocol != enumprotocol1) {
+                                networkManager.setProtocol(enumprotocol);
+                            }
+
+                            ChannelFuture channelfuture = channel.write(packet);
+                            channelfuture.addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
+                        } else {
+                            channel.eventLoop().execute(() -> {
+                                if (enumprotocol != enumprotocol1) {
+                                    networkManager.setProtocol(enumprotocol);
+                                }
+
+                                ChannelFuture channelfuture1 = channel.write(packet);
+                                channelfuture1.addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
+                            });
                         }
 
-                        ChannelFuture channelfuture1 = channel.write(packet);
-                        channelfuture1.addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
-                    });
-                }
+                        List<Packet> extraPackets = packet.getExtraPackets();
+                        if (extraPackets != null && !extraPackets.isEmpty()) {
+                            Iterator var6 = extraPackets.iterator();
 
-                List<Packet> extraPackets = packet.getExtraPackets();
-                if (extraPackets != null && !extraPackets.isEmpty()) {
-                    Iterator var6 = extraPackets.iterator();
-
-                    while (var6.hasNext()) {
-                        Packet extraPacket = (Packet) var6.next();
-                        this.playerSendPacket(player, extraPacket);
+                            while (var6.hasNext()) {
+                                Packet extraPacket = (Packet) var6.next();
+                                this.playerSendPacket(player, extraPacket);
+                            }
+                        }
                     }
                 }
             }
         }
+        //}
     }
 
 
     /** 取得區塊 */
     public Chunk getChunk(World world, int x, int z) {
+
         synchronized (getNMSWorld(world)) {
             IChunkAccess chunk = getNMSWorld(world).getChunkProvider().getChunkAt(x, z, ChunkStatus.FULL, true);
+
+            if (chunk == null) return null;
 
             if (chunk instanceof ChunkEmpty) {
                 return ((net.minecraft.server.v1_14_R1.Chunk) chunk).bukkitChunk;
@@ -96,7 +109,7 @@ public class v1_14_R1 implements Extend {
 
 
     /** 發送視野距離 */
-    public void playerSendViewDistance(Player player, int distance) {
+    public synchronized void playerSendViewDistance(Player player, int distance) {
 
         playerSendPacket(player, new PacketPlayOutViewDistance(distance)); // 發送視野距離
     }
@@ -106,7 +119,9 @@ public class v1_14_R1 implements Extend {
     public void playerSendChunk(Player player, Chunk chunk) {
 
         // 65535 + 1 = 65536 = 16 * 256 * 16
-        playerSendPacket(player, new PacketPlayOutMapChunk(getNMSChunk(chunk), 65535, true)); // 發送區塊
+        synchronized(getNMSChunk(chunk)) {
+            playerSendPacket(player, new PacketPlayOutMapChunk(getNMSChunk(chunk), 65535, true)); // 發送區塊
+        }
     }
 
 

@@ -134,7 +134,11 @@ public class Loop {
                     // 超出擴展的視野範圍
                     chunkKey.remove( key );
                     if (playerOutChunkSendUnload) {
-                        Value.extend.playerSendUnloadChunk(player, x, z); // 請求卸除區塊
+                        try {
+                            Value.extend.playerSendUnloadChunk(player, x, z); // 請求卸除區塊
+                        } catch (Exception ex) {
+                            // 不報錯誤
+                        }
                     }
 
                 }
@@ -276,15 +280,23 @@ public class Loop {
                     // 當前狀態
                     if (!waiting.isOk) {
                         Chunk chunk =Value.extend.getChunk(world, chunkX, chunkZ); // 取得方塊
+                        boolean noException = true; // 如果沒有錯誤
 
                         if (chunk != null) {
-                            Value.extend.playerSendViewDistance(player, viewDistance);  // 更新玩家應該要顯示的視野距離
-                            Value.extend.playerSendChunk(player, chunk);                // 發送區塊給玩家
+                            try {
+                                Value.extend.playerSendViewDistance(player, viewDistance);  // 更新玩家應該要顯示的視野距離
+                                Value.extend.playerSendChunk(player, chunk);                // 發送區塊給玩家
+                            } catch (Exception ex) {
+                                // 不報錯誤
+                                noException = false;
+                            }
                         }
 
-                        waiting.isOk = true;
-                        tickSend--;
-                        playerTickSend.put(player, tickSendAmount + 1);
+                        if (noException) {
+                            waiting.isOk = true;
+                            tickSend--;
+                            playerTickSend.put(player, tickSendAmount + 1);
+                        }
                     }
                 }
             }
