@@ -17,6 +17,8 @@ public interface Extend {
     void playerSendChunk(Player player, Chunk chunk);
     /** 發送區塊卸除 */
     void playerSendUnloadChunk(Player player, int x, int z);
+    /** 發送光照更新 */
+    void sendChunkLightUpdate(Player player, Chunk chunk);
 
     /**
      * 取得當前版本能使用的擴展

@@ -286,6 +286,7 @@ public class Loop {
                             try {
                                 Value.extend.playerSendViewDistance(player, viewDistance);  // 更新玩家應該要顯示的視野距離
                                 Value.extend.playerSendChunk(player, chunk);                // 發送區塊給玩家
+                                Value.extend.sendChunkLightUpdate(player, chunk);           // 發送區塊給玩家
                             } catch (Exception ex) {
                                 // 不報錯誤
                                 noException = false;

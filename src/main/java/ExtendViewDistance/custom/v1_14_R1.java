@@ -132,4 +132,12 @@ public class v1_14_R1 implements Extend {
     }
 
 
+    /** 發送光照更新 */
+    public void sendChunkLightUpdate(Player player, Chunk chunk) {
+
+        LightEngine lightEngine = getNMSChunk(chunk).getWorld().getChunkProvider().getLightEngine();                                // 取得光照引擎
+        playerSendPacket(player, new PacketPlayOutLightUpdate(new ChunkCoordIntPair(chunk.getX(), (chunk.getZ())), lightEngine));   // 更新光照
+    }
+
+
 }

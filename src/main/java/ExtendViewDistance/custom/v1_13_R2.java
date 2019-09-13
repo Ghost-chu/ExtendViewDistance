@@ -94,4 +94,11 @@ public class v1_13_R2 implements Extend {
     }
 
 
+    /** 發送光照更新 */
+    @Deprecated
+    public void sendChunkLightUpdate(Player player, Chunk chunk) {
+
+    }
+
+
 }
