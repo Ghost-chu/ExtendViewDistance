@@ -191,8 +191,8 @@ public class Loop {
 
 
         /**
-         * 取得最優先的糗求
-         * @return 糗求
+         * 取得最優先的請求
+         * @return 請求
          */
         public WaitingChunk get() {
 
