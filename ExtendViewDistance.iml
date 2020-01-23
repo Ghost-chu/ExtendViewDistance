@@ -21,9 +21,14 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: paper:1.13:R2" level="project" />
-    <orderEntry type="library" name="Maven: patched:1.13:R2" level="project" />
-    <orderEntry type="library" name="Maven: paper:1.14:R1" level="project" />
-    <orderEntry type="library" name="Maven: patched:1.14:R1" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: paper:1.15.2:NOPE">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/patched_1.15.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
